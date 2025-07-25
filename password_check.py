@@ -26,24 +26,25 @@ def check_special(pw):
         if char in special_chars:
             return 1
     return 0
-
-
+    
 password = str(input('Enter your password: '))
 
 #Exit is password is strong enough
 while password != 'q':
 
     score = 0
+   #Calculate score in order to determine strength.
     score += check_number(password)
     score += check_length(password)
     score += check_special(password)
     score += check_uppercase(password)
 
-
+    #Dictionary to assign strengths to scores.
     strength = {0:'Very Weak',1:'Weak',2:'Medium',3:'Strong',4:'Very Strong'}
 
     suggestions = []
 
+    #Add suggestions on how to improve password
     if check_length(password) == 0:
         suggestions.append('Use at least 8 characters.')
     if check_number(password) == 0:
@@ -53,6 +54,7 @@ while password != 'q':
     if check_special(password) == 0:
         suggestions.append('Include at least one special character.')
 
+   #Display password strength.
     print()
     if score == 0 or score == 1:
         print(f'Strength: {strength[score]} ❌')
@@ -60,10 +62,10 @@ while password != 'q':
     elif score == 2:
         print (f'Strength: {strength[score]} ⚠️')
 
-
     elif score == 3 or score == 4:
         print (f'Strength: {strength[score]} ✅')
 
+   #Display suggestions.
     if suggestions:
         print()
         print('Suggestions to improve your password: ')
